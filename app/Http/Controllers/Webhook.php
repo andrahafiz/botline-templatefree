@@ -214,7 +214,7 @@ class Webhook extends Controller
         if ($data != null) {
             $message = 'Silakan kirimaaaa pesan "MULAI" untuk memulai kuis.';
             $textMessageBuilder = new TextMessageBuilder($message);
-            $this->bot->replyMessage($event['replyToken'], $message);
+            $this->bot->replyMessage($replyToken, $textMessageBuilder);
         }
     }
 
