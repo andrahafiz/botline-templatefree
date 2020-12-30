@@ -213,7 +213,7 @@ class Webhook extends Controller
         $data = $this->templateGateway->getData();
         if ($data != null) {
             foreach ($data as $user) {
-                $test[] = $user->judul_template;
+                $test[] = $user[0];
             }
             $message = 'Silakan kirimaaaa pesan "MULAI" untuk memulai kuis.' . $test[0];
             $textMessageBuilder = new TextMessageBuilder($message);
