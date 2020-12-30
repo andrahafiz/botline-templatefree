@@ -26,7 +26,7 @@ class TemplateGateway
 
 
         if ($data) {
-            return (array) $data;
+            return  $data;
         }
 
         return null;
