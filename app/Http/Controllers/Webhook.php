@@ -212,7 +212,7 @@ class Webhook extends Controller
     {
         $data = $this->templateGateway->getData();
         foreach ($data as $d) {
-            $sting = $d['judul_template'];
+            $sting =  $d['rating'];
         }
 
         // if ($data != null) {
