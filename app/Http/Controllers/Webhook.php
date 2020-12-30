@@ -217,10 +217,11 @@ class Webhook extends Controller
 
 
         $data = $this->templateGateway->getData();
+
         // var_dump($data);
-        // for ($i = 1; $i < 3; $i++) {
-        //     $options[] = $data['judul_template'];
-        // }
+        for ($i = 1; $i < 3; $i++) {
+            $options = $data[0];
+        }
         $builder = new CarouselContainerBuilder([
             BubbleContainerBuilder::builder()
                 ->setDirection("ltr")
