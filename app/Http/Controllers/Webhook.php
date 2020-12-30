@@ -211,7 +211,7 @@ class Webhook extends Controller
     private function test($replyToken)
     {
         $data = $this->templateGateway->getData();
-        $sting = $data['judul_template'];
+        $sting = print_r($data['judul_template']);
 
         // if ($data != null) {
         //     foreach ($data as $user) {
