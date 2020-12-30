@@ -218,7 +218,7 @@ class Webhook extends Controller
         //         $test[] = $user[0];
         //     }
         //     $message = $test[0];
-        $textMessageBuilder = new TextMessageBuilder($data['rating']);
+        $textMessageBuilder = new TextMessageBuilder($data['judul_template']);
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
         // }
 
