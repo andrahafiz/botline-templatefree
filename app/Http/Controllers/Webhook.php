@@ -172,7 +172,8 @@ class Webhook extends Controller
     {
         $userMessage = $event['message']['text'];
         if (strtolower($userMessage) == 'template admin') {
-            $this->sendQuestion($event['replyToken']);
+            // $this->sendQuestion($event['replyToken']);
+            $this->test($event['replyToken']);
         } else {
             $message = 'Sepertinya kamu mengetikan perintah yang tidak ada.';
             $textMessageBuilder = new TextMessageBuilder($message);
@@ -205,6 +206,16 @@ class Webhook extends Controller
 
         // send message
         $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
+    }
+
+    private function test($replyToken)
+    {
+        $data = $this->templateGateway->getData();
+        if ($data != null) {
+            $message = 'Silakan kirimaaaa pesan "MULAI" untuk memulai kuis.';
+            $textMessageBuilder = new TextMessageBuilder($message);
+            $this->bot->replyMessage($event['replyToken'], $message);
+        }
     }
 
     private function sendQuestion($replyToken)
