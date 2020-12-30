@@ -21,7 +21,7 @@ class TemplateGateway
     {
         $data = $this->db->table('template')
             ->where('rating', 4)
-            ->first();
+            ->get();
 
         if ($data) {
             return (array) $data;
