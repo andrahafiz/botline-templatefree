@@ -212,18 +212,10 @@ class Webhook extends Controller
     {
         $data = $this->templateGateway->getData();
         foreach ($data as $d) {
-            $sting =  $d['rating'];
+            $sting =  $d[0];
         }
-
-        // if ($data != null) {
-        //     foreach ($data as $user) {
-        //         $test[] = $user[0];
-        //     }
-        //     $message = $test[0];
         $textMessageBuilder = new TextMessageBuilder($sting);
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
-        // }
-
     }
 
     private function sendQuestion($replyToken)
