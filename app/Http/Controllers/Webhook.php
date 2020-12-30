@@ -217,7 +217,7 @@ class Webhook extends Controller
 
 
         $data = $this->templateGateway->getData();
-        var_dump($data);
+        // var_dump($data);
         // for ($i = 1; $i < 3; $i++) {
         //     $options[] = $data['judul_template'];
         // }
@@ -238,7 +238,7 @@ class Webhook extends Controller
                         ->setPaddingAll("13px")
                         ->setContents(
                             [
-                                new TextComponentBuilder(var_dump($data), null, null, "sm", null, null, true, null, 'bold'),
+                                new TextComponentBuilder($data, null, null, "sm", null, null, true, null, 'bold'),
                                 new BoxComponentBuilder(
                                     'baseline',
                                     [
