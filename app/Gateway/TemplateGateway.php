@@ -20,8 +20,7 @@ class TemplateGateway
     function getData()
     {
         $data = $this->db->table('template')
-            ->get()
-            ->first();
+            ->get();
 
         if ($data) {
             return (array) $data;

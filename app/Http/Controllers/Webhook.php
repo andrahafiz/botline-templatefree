@@ -211,13 +211,13 @@ class Webhook extends Controller
     private function test($replyToken)
     {
         $data = $this->templateGateway->getData();
-        $data['judul_template'];
+
         // if ($data != null) {
         //     foreach ($data as $user) {
         //         $test[] = $user[0];
         //     }
         //     $message = $test[0];
-        $textMessageBuilder = new TextMessageBuilder($data['judul_template']);
+        $textMessageBuilder = new TextMessageBuilder($data['judul_template'][0]);
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
         // }
     }
