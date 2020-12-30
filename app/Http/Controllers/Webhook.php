@@ -214,7 +214,8 @@ class Webhook extends Controller
         foreach ($data as $d) {
             $sting =  $d[0];
         }
-        $textMessageBuilder = new TextMessageBuilder("andra");
+        $asdb = $sting . "aa";
+        $textMessageBuilder = new TextMessageBuilder($asdb);
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
     }
 
