@@ -217,10 +217,10 @@ class Webhook extends Controller
 
 
         $data = $this->templateGateway->getData();
-
-        for ($i = 1; $i < 3; $i++) {
-            $options[] = $data['judul_template'];
-        }
+        var_dump($data);
+        // for ($i = 1; $i < 3; $i++) {
+        //     $options[] = $data['judul_template'];
+        // }
         $builder = new CarouselContainerBuilder([
             BubbleContainerBuilder::builder()
                 ->setDirection("ltr")
@@ -238,7 +238,7 @@ class Webhook extends Controller
                         ->setPaddingAll("13px")
                         ->setContents(
                             [
-                                new TextComponentBuilder($options[1], null, null, "sm", null, null, true, null, 'bold'),
+                                new TextComponentBuilder(var_dump($data), null, null, "sm", null, null, true, null, 'bold'),
                                 new BoxComponentBuilder(
                                     'baseline',
                                     [
