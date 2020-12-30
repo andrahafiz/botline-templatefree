@@ -20,8 +20,7 @@ class TemplateGateway
     function getData()
     {
         $data = $this->db->table('template')
-            ->where('rating', 4)
-            ->first();
+            ->where('rating', 4);
 
         if ($data) {
             return (array) $data;
