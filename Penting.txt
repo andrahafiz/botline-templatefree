@@ -1,0 +1,10 @@
+Key: 8000 = kxTafHqjGvEG492JjS5v5arijueoLRuw
+
+
+Host        :ec2-34-196-34-158.compute-1.amazonaws.com
+Database    : db23joj2bv72mu
+User        : qfmtugfhueuian
+Port        : 5432
+Password    : e470ea33f9e334301b5cb87e2c43b1ea010c7a00e26c3660519fccc839de6049
+URI         : postgres://qfmtugfhueuian:e470ea33f9e334301b5cb87e2c43b1ea010c7a00e26c3660519fccc839de6049@ec2-34-196-34-158.compute-1.amazonaws.com:5432/db23joj2bv72mu
+Heroku CLI  : heroku pg:psql postgresql-objective-11328 --app botline-templatefree
