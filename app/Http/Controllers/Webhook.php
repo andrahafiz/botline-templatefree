@@ -212,7 +212,7 @@ class Webhook extends Controller
     {
         $data = $this->templateGateway->getData();
         if ($data != null) {
-            $message = 'Silakan kirimaaaa pesan "MULAI" untuk memulai kuis.';
+            $message = 'Silakan kirimaaaa pesan "MULAI" untuk memulai kuis.' . "" . var_dump($data);
             $textMessageBuilder = new TextMessageBuilder($message);
             $this->bot->replyMessage($replyToken, $textMessageBuilder);
         }
