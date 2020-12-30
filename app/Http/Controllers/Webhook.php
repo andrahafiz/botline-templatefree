@@ -238,7 +238,7 @@ class Webhook extends Controller
                         ->setPaddingAll("13px")
                         ->setContents(
                             [
-                                new TextComponentBuilder($options[0], null, null, "sm", null, null, true, null, 'bold'),
+                                new TextComponentBuilder($options[2], null, null, "sm", null, null, true, null, 'bold'),
                                 new BoxComponentBuilder(
                                     'baseline',
                                     [
