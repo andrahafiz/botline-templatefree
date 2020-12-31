@@ -221,6 +221,10 @@ class Webhook extends Controller
         foreach ($red as $value) {
             $hero_image = $value['image'];
         }
+
+        foreach ($red as $value) {
+            $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
+        }
         $builder = new CarouselContainerBuilder([
             BubbleContainerBuilder::builder()
                 ->setDirection("ltr")
@@ -233,6 +237,7 @@ class Webhook extends Controller
                     //     ->setAspectMode("cover")
                     new ImageComponentBuilder($hero_image, null, null, null, null, "full", "320:213", "cover")
                 )->setBody(
+                    // new BoxComponentBuilder("vertical",)
                     BoxComponentBuilder::builder()
                         ->setLayout("vertical")
                         ->setSpacing("sm")
@@ -243,11 +248,8 @@ class Webhook extends Controller
                                 new BoxComponentBuilder(
                                     'baseline',
                                     [
-                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
-                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png', null, "xs"),
-                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png', null, "xs"),
-                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png', null, "xs"),
-                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png', null, "xs"),
+
+                                        $icon,
                                         new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c")
                                     ]
                                 ),
