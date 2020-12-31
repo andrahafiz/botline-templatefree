@@ -223,7 +223,9 @@ class Webhook extends Controller
         }
 
         foreach ($red as $value) {
-            $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
+            for ($i = 0; $i <= $value['rating']; $i++) {
+                $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
+            }
         }
         $icon[] = new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c");
         $builder = new CarouselContainerBuilder([
