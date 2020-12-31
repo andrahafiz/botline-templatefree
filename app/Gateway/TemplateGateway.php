@@ -19,8 +19,7 @@ class TemplateGateway
     // Question
     function getData()
     {
-        $data = $this->db->table('template')
-            ->get();
+        $data = $this->db->select("select * from template");
         if ($data) {
             return (array) $data;
         }
