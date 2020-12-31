@@ -15,3 +15,14 @@
     "link_down": "https:\/\/www.creative-tim.com\/product\/material-dashboard",
     "image": "https:\/\/s3.amazonaws.com\/creativetim_bucket\/products\/50\/original\/opt_md_thumbnail.jpg?1522232645"
 }]
+
+// GUNAKAN  FIRST
+Data: {
+    "id": 1,
+    "judul_template": "Material Dashboard Dark Edition",
+    "rating": "0",
+    "keterangan": "Tanpa Keterangan",
+    "link_prev": "https:\/\/demos.creative-tim.com\/material-dashboard-dark\/examples\/dashboard.html?_ga=2.238757632.1403242379.1609264854-288228712.1608431855",
+    "link_down": "https:\/\/www.creative-tim.com\/product\/material-dashboard-dark",
+    "image": "https:\/\/user-images.githubusercontent.com\/10515204\/56117400-9a911800-5f85-11e9-878b-3f998609a6c8.jpg"
+}
