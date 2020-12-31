@@ -227,7 +227,7 @@ class Webhook extends Controller
         foreach ($red as $value) {
             # code...
             for ($i = 0; $i < $value['rating']; $i++) {
-                $op =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
+                $op[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
             }
             $columns[] = BubbleContainerBuilder::builder()
                 ->setDirection("ltr")
