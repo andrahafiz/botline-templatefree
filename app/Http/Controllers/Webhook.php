@@ -216,7 +216,7 @@ class Webhook extends Controller
         foreach ($data["\u0000*\u0000items"] as $d) {
             $sting .= $d['rating'] . ',';
         }
-        $textMessageBuilder = new TextMessageBuilder($sting);
+        $textMessageBuilder = new TextMessageBuilder("anra");
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
     }
 
