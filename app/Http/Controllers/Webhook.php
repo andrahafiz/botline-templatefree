@@ -227,7 +227,7 @@ class Webhook extends Controller
         $builder = null;
         foreach ($red as $value) {
             // $hero_image = $value['image'];
-            $builder .= new CarouselContainerBuilder([
+            $builder = new CarouselContainerBuilder([
                 BubbleContainerBuilder::builder()
                     ->setDirection("ltr")
                     ->setHero(
