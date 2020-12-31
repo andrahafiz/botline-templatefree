@@ -27,14 +27,4 @@ class TemplateGateway
 
         return null;
     }
-
-
-
-    function isAnswerEqual(int $number, string $answer)
-    {
-        return $this->db->table('questions')
-            ->where('number', $number)
-            ->where('answer', $answer)
-            ->exists();
-    }
 }

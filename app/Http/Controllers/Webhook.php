@@ -190,33 +190,17 @@ class Webhook extends Controller
             $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
         };
     }
-    private function stickerMessage($event)
-    {
-        // create sticker message
-        $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
 
-        // create text message
-        $message = 'Silakan kirimaaaa pesan "MULAI" untuk memulai kuis.';
-        $textMessageBuilder = new TextMessageBuilder($message);
-
-        // merge all message
-        $multiMessageBuilder = new MultiMessageBuilder();
-        $multiMessageBuilder->add($stickerMessageBuilder);
-        $multiMessageBuilder->add($textMessageBuilder);
-
-        // send message
-        $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
-    }
 
     private function test($replyToken)
     {
         $data = $this->templateGateway->getData();
-        file_put_contents('php://stderr', 'Data: ' . json_encode($data));
+        file_put_contents('php://stderr', 'Data: ' . json_decode($data));
         $sting = '';
         foreach ($data["\u0000*\u0000items"] as $d) {
             $sting .= $d['rating'] . ',';
         }
-        $textMessageBuilder = new TextMessageBuilder("anra");
+        $textMessageBuilder = new TextMessageBuilder($sting);
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
     }
 
