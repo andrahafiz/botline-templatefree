@@ -21,7 +21,7 @@ class TemplateGateway
     {
         $data = $this->db->table('template')
             ->get()
-            ->fetch();
+            ->first();
         if ($data) {
             return (array) $data;
         }
