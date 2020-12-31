@@ -20,7 +20,7 @@ class TemplateGateway
     function getData()
     {
         // $data = $this->db->select("select * from template");
-        $data = $this->db->table('template')->get();
+        $data = $this->db->table('template')->get()->first();
         if ($data) {
             return (array) $data;
         }
