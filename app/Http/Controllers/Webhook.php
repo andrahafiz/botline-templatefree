@@ -247,11 +247,11 @@ class Webhook extends Controller
                                 new TextComponentBuilder("judul", null, null, "sm", null, null, true, null, 'bold'),
                                 new BoxComponentBuilder(
                                     'baseline',
-                                    [
+                                    // [
 
-                                        $icon,
-                                        new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c")
-                                    ]
+                                    $icon
+                                    // new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c")
+                                    // ]
                                 ),
                                 new BoxComponentBuilder(
                                     'vertical',
