@@ -229,7 +229,58 @@ class Webhook extends Controller
         $columns = array();
         for ($i = 0; $i < 5; $i++) {
             # code...
-            $columns[] = BubbleContainerBuilder::builder()->setHero(new ImageComponentBuilder("https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg", null, null, null, null, "full", "320:213", "cover"));
+            $columns[] = BubbleContainerBuilder::builder()
+                ->setDirection("ltr")
+                ->setHero(
+                    // new ImageComponentBuilder('https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg')
+                    // ImageComponentBuilder::builder()
+                    //     ->setUrl($hero_image)
+                    //     ->setSize("full")
+                    //     ->setAspectRatio("320:213")
+                    //     ->setAspectMode("cover")
+                    new ImageComponentBuilder($hero_image, null, null, null, null, "full", "320:213", "cover")
+                )->setBody(
+                    // new BoxComponentBuilder("vertical",)
+                    BoxComponentBuilder::builder()
+                        ->setLayout("vertical")
+                        ->setSpacing("sm")
+                        ->setPaddingAll("13px")
+                        ->setContents(
+                            [
+                                new TextComponentBuilder("judul", null, null, "sm", null, null, true, null, 'bold'),
+                                new BoxComponentBuilder(
+                                    'baseline',
+                                    // [
+
+                                    $icon
+                                    // new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c")
+                                    // ]
+                                ),
+                                new BoxComponentBuilder(
+                                    'vertical',
+                                    [
+                                        new BoxComponentBuilder(
+                                            'baseline',
+                                            [new TextComponentBuilder('Keterangan', 5, null, "xs", null, null, null, null, null, "#000000")],
+                                            null,
+                                            "sm"
+                                        )
+                                    ]
+                                )
+                            ]
+                        )
+
+                )->setFooter(
+                    BoxComponentBuilder::builder()
+                        ->setLayout("horizontal")
+                        ->setSpacing("sm")
+                        ->setContents(
+                            [
+                                new ButtonComponentBuilder(new UriTemplateActionBuilder('Priview', 'https://www.dicoding.com/'), null, null, null, "secondary"),
+                                new ButtonComponentBuilder(new UriTemplateActionBuilder('Download', 'https://www.dicoding.com/'), null, null, null, "primary")
+                            ]
+                        )
+                );
         }
         $builder = new CarouselContainerBuilder($columns);
         // $builder = new CarouselContainerBuilder([
