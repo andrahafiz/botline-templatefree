@@ -197,12 +197,17 @@ class Webhook extends Controller
         $data = $this->templateGateway->getData();
         file_put_contents('php://stderr', 'Data: ' . json_encode($data));
         $sting = json_encode($data);
-        $red = json_decode($sting);
+        $red = json_decode($sting, true);
+        $text = "";
+        foreach ($red as $value) {
+            $text .= $value['id'];
+        }
+
         // '';
         // foreach ($data["\u0000*\u0000items"] as $d) {
         //     $sting .= $d['rating'] . ',';
         // }
-        $textMessageBuilder = new TextMessageBuilder($sting);
+        $textMessageBuilder = new TextMessageBuilder($text);
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
     }
 
