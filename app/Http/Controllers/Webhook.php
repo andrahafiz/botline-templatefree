@@ -294,7 +294,7 @@ class Webhook extends Controller
             $actions = array(
                 new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Profile", "action=getLocation&lat=" . $value['id']),
             );
-            $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("name " . $value['id'], "description " . $row['id'], $img_url, $actions);
+            $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("name " . $value['id'], "description " . $value['id'], $img_url, $actions);
             $columns[] = $column;
         }
         $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
