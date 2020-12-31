@@ -226,6 +226,7 @@ class Webhook extends Controller
         $columns = array();
         foreach ($red as $value) {
             # code...
+            $op = array();
             for ($i = 0; $i < $value['rating']; $i++) {
                 $op[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
             }
