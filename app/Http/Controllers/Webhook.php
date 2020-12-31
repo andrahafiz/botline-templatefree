@@ -247,7 +247,7 @@ class Webhook extends Controller
                                         new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
                                         new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
                                         new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
-                                        new TextComponentBuilder($value['rating'], null, "md", "xs", null, null, null, null, null, "#8c8c8c")
+                                        new TextComponentBuilder(floatval($value['rating']) . "", null, "md", "xs", null, null, null, null, null, "#8c8c8c")
                                     ]
                                 ),
                                 new BoxComponentBuilder(
