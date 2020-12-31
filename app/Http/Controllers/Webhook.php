@@ -238,21 +238,24 @@ class Webhook extends Controller
                         ->setPaddingAll("13px")
                         ->setContents(
                             [
-                                new TextComponentBuilder("judul", null, null, "sm", null, null, true, null, 'bold'),
+                                new TextComponentBuilder($value['judul_template'], null, null, "sm", null, null, true, null, 'bold'),
                                 new BoxComponentBuilder(
                                     'baseline',
-                                    // [
+                                    [
 
-                                    $icon
-                                    // new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c")
-                                    // ]
+                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
+                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
+                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
+                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
+                                        new TextComponentBuilder($value['rating'], null, "md", "xs", null, null, null, null, null, "#8c8c8c")
+                                    ]
                                 ),
                                 new BoxComponentBuilder(
                                     'vertical',
                                     [
                                         new BoxComponentBuilder(
                                             'baseline',
-                                            [new TextComponentBuilder('Keterangan', 5, null, "xs", null, null, null, null, null, "#000000")],
+                                            [new TextComponentBuilder($value['keterangan'], 5, null, "xs", null, null, null, null, null, "#000000")],
                                             null,
                                             "sm"
                                         )
@@ -267,8 +270,8 @@ class Webhook extends Controller
                         ->setSpacing("sm")
                         ->setContents(
                             [
-                                new ButtonComponentBuilder(new UriTemplateActionBuilder('Priview', 'https://www.dicoding.com/'), null, null, null, "secondary"),
-                                new ButtonComponentBuilder(new UriTemplateActionBuilder('Download', 'https://www.dicoding.com/'), null, null, null, "primary")
+                                new ButtonComponentBuilder(new UriTemplateActionBuilder('Priview', $value['link_prev']), null, null, null, "secondary"),
+                                new ButtonComponentBuilder(new UriTemplateActionBuilder('Download', $value['link_down']), null, null, null, "primary")
                             ]
                         )
                 );
