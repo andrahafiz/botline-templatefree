@@ -226,6 +226,9 @@ class Webhook extends Controller
         $columns = array();
         foreach ($red as $value) {
             # code...
+            for ($i = 0; $i < $value['rating']; $i++) {
+                $op =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
+            }
             $columns[] = BubbleContainerBuilder::builder()
                 ->setDirection("ltr")
                 ->setHero(
@@ -241,14 +244,15 @@ class Webhook extends Controller
                                 new TextComponentBuilder($value['judul_template'], null, null, "sm", null, null, true, null, 'bold'),
                                 new BoxComponentBuilder(
                                     'baseline',
-                                    [
+                                    $op
+                                    // [
 
-                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
-                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
-                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
-                                        new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
-                                        new TextComponentBuilder(floatval($value['rating']) . "", null, "md", "xs", null, null, null, null, null, "#8c8c8c")
-                                    ]
+                                    //     new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
+                                    //     new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
+                                    //     new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
+                                    //     new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
+                                    //     new TextComponentBuilder(floatval($value['rating']) . "", null, "md", "xs", null, null, null, null, null, "#8c8c8c")
+                                    // ]
                                 ),
                                 new BoxComponentBuilder(
                                     'vertical',
