@@ -211,7 +211,7 @@ class Webhook extends Controller
     private function test($replyToken)
     {
         $data = $this->templateGateway->getData();
-        file_put_contents('php://stderr', 'Data: ' . json_encode($data));
+        file_put_contents('php://stderr', 'Data: ' . var_dump($data));
         $sting = '';
         foreach ($data as $d) {
             $sting .= $d['rating'] . ',';
