@@ -213,7 +213,7 @@ class Webhook extends Controller
         $data = $this->templateGateway->getData();
         file_put_contents('php://stderr', 'Data: ' . json_encode($data));
         $sting = '';
-        foreach ($data["\u0000*\u0000items"] as $d) {
+        foreach ($data as $d) {
             $sting .= $d['rating'] . ',';
         }
         $textMessageBuilder = new TextMessageBuilder("anra");
