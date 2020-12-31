@@ -173,7 +173,7 @@ class Webhook extends Controller
         $userMessage = $event['message']['text'];
         if (strtolower($userMessage) == 'template admin') {
             // $this->sendQuestion($event['replyToken']);
-            $this->test($event['replyToken']);
+            $this->sendQuestion($event['replyToken']);
         } else {
             $message = 'Sepertinya kamu mengetikan perintah yang tidak ada.';
             $textMessageBuilder = new TextMessageBuilder($message);
@@ -195,7 +195,7 @@ class Webhook extends Controller
     private function test($replyToken)
     {
         $data = $this->templateGateway->getData();
-        file_put_contents('php://stderr', 'Data: ' . json_encode($data));
+        // file_put_contents('php://stderr', 'Data: ' . json_encode($data));
         $sting = json_encode($data);
         $red = json_decode($sting, true);
         $text = "";
@@ -221,18 +221,20 @@ class Webhook extends Controller
 
 
         $data = $this->templateGateway->getData();
-
-        // var_dump($data);
-        for ($i = 1; $i < 3; $i++) {
-            $options[] = $data['judul_template'];
+        $sting = json_encode($data);
+        $red = json_decode($sting, true);
+        $hero_image = "";
+        foreach ($red as $value) {
+            $hero_image = $value['image'];
         }
+
         $builder = new CarouselContainerBuilder([
             BubbleContainerBuilder::builder()
                 ->setDirection("ltr")
                 ->setHero(
                     // new ImageComponentBuilder('https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg')
                     ImageComponentBuilder::builder()
-                        ->setUrl('https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg')
+                        ->setUrl($hero_image)
                         ->setSize("full")
                         ->setAspectRatio("320:213")
                         ->setAspectMode("cover")
@@ -243,7 +245,7 @@ class Webhook extends Controller
                         ->setPaddingAll("13px")
                         ->setContents(
                             [
-                                new TextComponentBuilder($options[0], null, null, "sm", null, null, true, null, 'bold'),
+                                new TextComponentBuilder("judul", null, null, "sm", null, null, true, null, 'bold'),
                                 new BoxComponentBuilder(
                                     'baseline',
                                     [
