@@ -223,68 +223,72 @@ class Webhook extends Controller
         }
 
         foreach ($red as $value) {
-            for ($i = 0; $i <= $value['rating']; $i++) {
-                $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
-            }
+            $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
         }
         $icon[] = new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c");
-        $builder = new CarouselContainerBuilder([
-            BubbleContainerBuilder::builder()
-                ->setDirection("ltr")
-                ->setHero(
-                    // new ImageComponentBuilder('https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg')
-                    // ImageComponentBuilder::builder()
-                    //     ->setUrl($hero_image)
-                    //     ->setSize("full")
-                    //     ->setAspectRatio("320:213")
-                    //     ->setAspectMode("cover")
-                    new ImageComponentBuilder($hero_image, null, null, null, null, "full", "320:213", "cover")
-                )->setBody(
-                    // new BoxComponentBuilder("vertical",)
-                    BoxComponentBuilder::builder()
-                        ->setLayout("vertical")
-                        ->setSpacing("sm")
-                        ->setPaddingAll("13px")
-                        ->setContents(
-                            [
-                                new TextComponentBuilder("judul", null, null, "sm", null, null, true, null, 'bold'),
-                                new BoxComponentBuilder(
-                                    'baseline',
-                                    // [
+        $columns = array();
+        for ($i = 0; $i < 1; $i++) {
+            # code...
+            $columns = BubbleContainerBuilder::builder()->setHero(new ImageComponentBuilder("https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg", null, null, null, null, "full", "320:213", "cover"));
+        }
+        $builder = new CarouselContainerBuilder($columns);
+        // $builder = new CarouselContainerBuilder([
+        //     BubbleContainerBuilder::builder()
+        //         ->setDirection("ltr")
+        //         ->setHero(
+        //             // new ImageComponentBuilder('https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg')
+        //             // ImageComponentBuilder::builder()
+        //             //     ->setUrl($hero_image)
+        //             //     ->setSize("full")
+        //             //     ->setAspectRatio("320:213")
+        //             //     ->setAspectMode("cover")
+        //             new ImageComponentBuilder($hero_image, null, null, null, null, "full", "320:213", "cover")
+        //         )->setBody(
+        //             // new BoxComponentBuilder("vertical",)
+        //             BoxComponentBuilder::builder()
+        //                 ->setLayout("vertical")
+        //                 ->setSpacing("sm")
+        //                 ->setPaddingAll("13px")
+        //                 ->setContents(
+        //                     [
+        //                         new TextComponentBuilder("judul", null, null, "sm", null, null, true, null, 'bold'),
+        //                         new BoxComponentBuilder(
+        //                             'baseline',
+        //                             // [
 
-                                    $icon
-                                    // new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c")
-                                    // ]
-                                ),
-                                new BoxComponentBuilder(
-                                    'vertical',
-                                    [
-                                        new BoxComponentBuilder(
-                                            'baseline',
-                                            [new TextComponentBuilder('Keterangan', 5, null, "xs", null, null, null, null, null, "#000000")],
-                                            null,
-                                            "sm"
-                                        )
-                                    ]
-                                )
-                            ]
-                        )
+        //                             $icon
+        //                             // new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c")
+        //                             // ]
+        //                         ),
+        //                         new BoxComponentBuilder(
+        //                             'vertical',
+        //                             [
+        //                                 new BoxComponentBuilder(
+        //                                     'baseline',
+        //                                     [new TextComponentBuilder('Keterangan', 5, null, "xs", null, null, null, null, null, "#000000")],
+        //                                     null,
+        //                                     "sm"
+        //                                 )
+        //                             ]
+        //                         )
+        //                     ]
+        //                 )
 
-                )->setFooter(
-                    BoxComponentBuilder::builder()
-                        ->setLayout("horizontal")
-                        ->setSpacing("sm")
-                        ->setContents(
-                            [
-                                new ButtonComponentBuilder(new UriTemplateActionBuilder('Priview', 'https://www.dicoding.com/'), null, null, null, "secondary"),
-                                new ButtonComponentBuilder(new UriTemplateActionBuilder('Download', 'https://www.dicoding.com/'), null, null, null, "primary")
-                            ]
-                        )
-                ),
-            BubbleContainerBuilder::builder()->setBody(
-                new BoxComponentBuilder(ComponentLayout::VERTICAL, [new TextComponentBuilder('World!')])
-            )
-        ]);
+        //         )->setFooter(
+        //             BoxComponentBuilder::builder()
+        //                 ->setLayout("horizontal")
+        //                 ->setSpacing("sm")
+        //                 ->setContents(
+        //                     [
+        //                         new ButtonComponentBuilder(new UriTemplateActionBuilder('Priview', 'https://www.dicoding.com/'), null, null, null, "secondary"),
+        //                         new ButtonComponentBuilder(new UriTemplateActionBuilder('Download', 'https://www.dicoding.com/'), null, null, null, "primary")
+        //                     ]
+        //                 )
+        //         ),
+        //     BubbleContainerBuilder::builder()->setBody(
+        //         new BoxComponentBuilder(ComponentLayout::VERTICAL, [new TextComponentBuilder('World!')])
+        //     )
+        // ]);
 
         // $columns = array();
         // $img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";

@@ -19,7 +19,7 @@ class TemplateGateway
     // Question
     function getData()
     {
-        $data = $this->db->select("select * from template");
+        $data = $this->db->select("select * from template limit 5");
         // $data = $this->db->table('template')->get()->first();
         if ($data) {
             return (array) $data;
