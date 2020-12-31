@@ -212,8 +212,9 @@ class Webhook extends Controller
     {
         $data = $this->templateGateway->getData();
         file_put_contents('php://stderr', 'Data: ' . json_encode($data));
+        $sting = '';
         foreach ($data as $d) {
-            $sting =  $d[0];
+            $sting .= $d['rating'] . ',';
         }
         $textMessageBuilder = new TextMessageBuilder($sting);
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
