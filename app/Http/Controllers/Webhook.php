@@ -217,28 +217,19 @@ class Webhook extends Controller
         $sting = json_encode($data);
         $red = json_decode($sting, true);
         $hero_image = "";
-        // $builder = null;
-        foreach ($red as $value) {
-            $hero_image = $value['image'];
-        }
+
 
         foreach ($red as $value) {
             $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
         }
         $icon[] = new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c");
         $columns = array();
-        for ($i = 0; $i < 5; $i++) {
+        foreach ($red as $value) {
             # code...
             $columns[] = BubbleContainerBuilder::builder()
                 ->setDirection("ltr")
                 ->setHero(
-                    // new ImageComponentBuilder('https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg')
-                    // ImageComponentBuilder::builder()
-                    //     ->setUrl($hero_image)
-                    //     ->setSize("full")
-                    //     ->setAspectRatio("320:213")
-                    //     ->setAspectMode("cover")
-                    new ImageComponentBuilder($hero_image, null, null, null, null, "full", "320:213", "cover")
+                    new ImageComponentBuilder($value['image'], null, null, null, null, "full", "320:213", "cover")
                 )->setBody(
                     // new BoxComponentBuilder("vertical",)
                     BoxComponentBuilder::builder()
