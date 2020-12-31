@@ -229,7 +229,7 @@ class Webhook extends Controller
         $columns = array();
         for ($i = 0; $i < 1; $i++) {
             # code...
-            $columns = BubbleContainerBuilder::builder()->setHero(new ImageComponentBuilder("https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg", null, null, null, null, "full", "320:213", "cover"));
+            $columns[] = BubbleContainerBuilder::builder()->setHero(new ImageComponentBuilder("https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg", null, null, null, null, "full", "320:213", "cover"));
         }
         $builder = new CarouselContainerBuilder($columns);
         // $builder = new CarouselContainerBuilder([
