@@ -229,7 +229,7 @@ class Webhook extends Controller
                     $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png', null, "xs");
                 }
             }
-            $op[] = new TextComponentBuilder(floatval($value['rating']) . "", null, "md", "xs", null, null, null, null, null, "#8c8c8c");
+            $icon[] = new TextComponentBuilder(floatval($value['rating']) . "", null, "md", "xs", null, null, null, null, null, "#8c8c8c");
             $columns[] = BubbleContainerBuilder::builder()
                 ->setDirection("ltr")
                 ->setHero(
@@ -245,7 +245,7 @@ class Webhook extends Controller
                                 new TextComponentBuilder($value['judul_template'], null, null, "sm", null, null, true, null, 'bold'),
                                 new BoxComponentBuilder(
                                     'baseline',
-                                    $op
+                                    $icon
                                 ),
                                 new BoxComponentBuilder(
                                     'vertical',
