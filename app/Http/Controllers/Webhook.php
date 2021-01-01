@@ -214,26 +214,22 @@ class Webhook extends Controller
     private function sendQuestion($replyToken)
     {
         $data = $this->templateGateway->getData();
-        $sting = json_encode($data);
-        $red = json_decode($sting, true);
-        $hero_image = "";
+        $converttojson = json_encode($data);
+        $converttoarray = json_decode($converttojson, true);
+        // $hero_image = "";
 
-
-        foreach ($red as $value) {
-            $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
-        }
-        $icon[] = new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c");
         $columns = array();
-        foreach ($red as $value) {
+        foreach ($converttoarray as $value) {
             # code...
-            $op = array();
+            $icon = array();
             for ($i = 1; $i <= 5; $i++) {
                 if ($i <= $value['rating']) {
-                    $op[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
+                    $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
                 } else {
-                    $op[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png', null, "xs");
+                    $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png', null, "xs");
                 }
             }
+            $op[] = new TextComponentBuilder(floatval($value['rating']) . "", null, "md", "xs", null, null, null, null, null, "#8c8c8c");
             $columns[] = BubbleContainerBuilder::builder()
                 ->setDirection("ltr")
                 ->setHero(
@@ -250,14 +246,6 @@ class Webhook extends Controller
                                 new BoxComponentBuilder(
                                     'baseline',
                                     $op
-                                    // [
-
-                                    //     new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
-                                    //     new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
-                                    //     new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
-                                    //     new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs"),
-                                    //     new TextComponentBuilder(floatval($value['rating']) . "", null, "md", "xs", null, null, null, null, null, "#8c8c8c")
-                                    // ]
                                 ),
                                 new BoxComponentBuilder(
                                     'vertical',
@@ -286,75 +274,6 @@ class Webhook extends Controller
                 );
         }
         $builder = new CarouselContainerBuilder($columns);
-        // $builder = new CarouselContainerBuilder([
-        //     BubbleContainerBuilder::builder()
-        //         ->setDirection("ltr")
-        //         ->setHero(
-        //             // new ImageComponentBuilder('https://d17ivq9b7rppb3.cloudfront.net/original/commons/home-hero-new.jpg')
-        //             // ImageComponentBuilder::builder()
-        //             //     ->setUrl($hero_image)
-        //             //     ->setSize("full")
-        //             //     ->setAspectRatio("320:213")
-        //             //     ->setAspectMode("cover")
-        //             new ImageComponentBuilder($hero_image, null, null, null, null, "full", "320:213", "cover")
-        //         )->setBody(
-        //             // new BoxComponentBuilder("vertical",)
-        //             BoxComponentBuilder::builder()
-        //                 ->setLayout("vertical")
-        //                 ->setSpacing("sm")
-        //                 ->setPaddingAll("13px")
-        //                 ->setContents(
-        //                     [
-        //                         new TextComponentBuilder("judul", null, null, "sm", null, null, true, null, 'bold'),
-        //                         new BoxComponentBuilder(
-        //                             'baseline',
-        //                             // [
-
-        //                             $icon
-        //                             // new TextComponentBuilder('4.0', null, "md", "xs", null, null, null, null, null, "#8c8c8c")
-        //                             // ]
-        //                         ),
-        //                         new BoxComponentBuilder(
-        //                             'vertical',
-        //                             [
-        //                                 new BoxComponentBuilder(
-        //                                     'baseline',
-        //                                     [new TextComponentBuilder('Keterangan', 5, null, "xs", null, null, null, null, null, "#000000")],
-        //                                     null,
-        //                                     "sm"
-        //                                 )
-        //                             ]
-        //                         )
-        //                     ]
-        //                 )
-
-        //         )->setFooter(
-        //             BoxComponentBuilder::builder()
-        //                 ->setLayout("horizontal")
-        //                 ->setSpacing("sm")
-        //                 ->setContents(
-        //                     [
-        //                         new ButtonComponentBuilder(new UriTemplateActionBuilder('Priview', 'https://www.dicoding.com/'), null, null, null, "secondary"),
-        //                         new ButtonComponentBuilder(new UriTemplateActionBuilder('Download', 'https://www.dicoding.com/'), null, null, null, "primary")
-        //                     ]
-        //                 )
-        //         ),
-        //     BubbleContainerBuilder::builder()->setBody(
-        //         new BoxComponentBuilder(ComponentLayout::VERTICAL, [new TextComponentBuilder('World!')])
-        //     )
-        // ]);
-
-        // $columns = array();
-        // $img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
-        // foreach ($red as $value) {
-        //     $actions = array(
-        //         new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Profile", "action=getLocation&lat=" . $value['id']),
-        //     );
-        //     $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("name " . $value['id'], "description " . $value['id'], $img_url, $actions);
-        //     $columns[] = $column;
-        // }
-        // $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
-        // $outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("Location Nearby", $carousel);
 
         // build message
         $messageBuilder = new FlexMessageBuilder("Gunakan mobile app untuk melihat soal", $builder);
