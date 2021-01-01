@@ -167,6 +167,7 @@ class Webhook extends Controller
             );
         }
     }
+    //IMAGE BAGUS https://user-images.githubusercontent.com/10515204/56117400-9a911800-5f85-11e9-878b-3f998609a6c8.jpg
 
     private function textMessage($event)
     {
@@ -252,7 +253,7 @@ class Webhook extends Controller
                                     [
                                         new BoxComponentBuilder(
                                             'baseline',
-                                            [new TextComponentBuilder($value['keterangan'], 5, null, "xs", null, null, null, null, null, "#000000")],
+                                            [new TextComponentBuilder("asd\n", 5, null, "xs", null, null, null, null, null, "#000000")],
                                             null,
                                             "sm"
                                         )
