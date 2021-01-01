@@ -243,7 +243,7 @@ class Webhook extends Controller
                         ->setPaddingAll("13px")
                         ->setContents(
                             [
-                                new TextComponentBuilder($value['judul_template'], null, null, "lg", null, null, true, null, 'bold'),
+                                new TextComponentBuilder($value['judul_template'], null, null, "lg", null, null, true, null, 'bold', "#000000"),
                                 new BoxComponentBuilder(
                                     'baseline',
                                     $icon
