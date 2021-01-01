@@ -253,7 +253,7 @@ class Webhook extends Controller
                                     [
                                         new BoxComponentBuilder(
                                             'baseline',
-                                            [new TextComponentBuilder("asd\n", 5, null, "xs", null, null, null, null, null, "#000000")],
+                                            [new TextComponentBuilder("asd\nsadasd\nasdasdasdasd", 5, null, "xs", null, null, null, null, null, "#000000")],
                                             null,
                                             "sm"
                                         )
