@@ -263,7 +263,7 @@ class Webhook extends Controller
                                         new BoxComponentBuilder(
                                             'baseline',
                                             [
-                                                new TextComponentBuilder($value['keterangan'], 5, null, "xs", null, null, true, null, null, "#2d2d2d")
+                                                new TextComponentBuilder($value['keterangan'], 5, null, "xs", null, null, true, null, null, "#696d65")
                                             ],
                                             null,
                                             "sm"
