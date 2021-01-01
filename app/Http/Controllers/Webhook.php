@@ -245,7 +245,7 @@ class Webhook extends Controller
                                 new TextComponentBuilder($value['judul_template'], null, null, "sm", null, null, true, null, 'bold'),
                                 new BoxComponentBuilder(
                                     'baseline',
-                                    $op[]
+                                    $op
                                 ),
                                 new BoxComponentBuilder(
                                     'vertical',
