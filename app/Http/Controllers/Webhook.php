@@ -150,13 +150,13 @@ class Webhook extends Controller
             $message2 = "Kegunaan akun ini adalah menampilkan beberapa rekomendasi template website yang dapat anda download secara gratis \n";
             $textMessageBuilder2 = new TextMessageBuilder($message2);
 
-            $message3 =  new TemplateMessageBuilder("ayam", new ButtonTemplateBuilder("title", "text"));
+            // $message3 =  new TemplateMessageBuilder("ayam", new ButtonTemplateBuilder("title", "text"));
 
             $multiMessageBuilder = new MultiMessageBuilder();
             $multiMessageBuilder->add($textMessageBuilder);
             $multiMessageBuilder->add($stickerMessageBuilder);
             $multiMessageBuilder->add($textMessageBuilder2);
-            $multiMessageBuilder->add($message3);
+            // $multiMessageBuilder->add($message3);
 
             $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
 
