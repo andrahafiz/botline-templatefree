@@ -186,7 +186,7 @@ class Webhook extends Controller
     private function textMessage($event)
     {
         $userMessage = $event['message']['text'];
-        if (strtolower($userMessage) == 'template admin') {
+        if (strtolower($userMessage) == 'template admin' or strtolower($userMessage) == 'template lainnya') {
             $this->sendQuestion($event['replyToken'], $userMessage);
         } else {
             $message = 'Sepertinya kamu mengetikan perintah yang tidak tersedia.';
