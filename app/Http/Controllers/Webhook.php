@@ -129,8 +129,6 @@ class Webhook extends Controller
                 }
             }
         }
-
-
         $this->response->setContent("No events found!");
         $this->response->setStatusCode(200);
         return $this->response;
@@ -143,24 +141,25 @@ class Webhook extends Controller
         $res = $this->bot->getProfile($event['source']['userId']);
         if ($res->isSucceeded()) {
             $profile = $res->getJSONDecodedBody();
-
-            // create welcome message
-            $message  = "Salam kenal, " . $profile['displayName'] . "!\n";
-            $message .= "Silakan kirim pesan \"MULAI\" untuk memulai kuis Tebak Kode.";
+            $message  = "Halo " . $profile['displayName'] . "!\n";
+            $message .= "Terima kasih telah menambahkan saya sebagai teman anda";
             $textMessageBuilder = new TextMessageBuilder($message);
 
-            // create sticker message
-            $stickerMessageBuilder = new StickerMessageBuilder(1, 3);
+            $stickerMessageBuilder = new StickerMessageBuilder(1, 2);
 
-            // merge all message
+            $message2 = "Kegunaan akun ini adalah menampilkan beberapa rekomendasi template website yang dapat anda download secara gratis \n";
+            $textMessageBuilder2 = new TextMessageBuilder($message2);
+
+            $message3 =  new TemplateMessageBuilder("ayam", new ButtonTemplateBuilder("title", "text"));
+
             $multiMessageBuilder = new MultiMessageBuilder();
             $multiMessageBuilder->add($textMessageBuilder);
             $multiMessageBuilder->add($stickerMessageBuilder);
+            $multiMessageBuilder->add($textMessageBuilder2);
+            $multiMessageBuilder->add($message3);
 
-            // send reply message
             $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
 
-            // save user data
             $this->userGateway->saveUser(
                 $profile['userId'],
                 $profile['displayName']
@@ -173,7 +172,6 @@ class Webhook extends Controller
     {
         $userMessage = $event['message']['text'];
         if (strtolower($userMessage) == 'template admin') {
-            // $this->sendQuestion($event['replyToken']);
             $this->sendQuestion($event['replyToken']);
         } else {
             $message = 'Sepertinya kamu mengetikan perintah yang tidak ada.';
@@ -204,10 +202,6 @@ class Webhook extends Controller
             $text .= $value['id'];
         }
 
-        // '';
-        // foreach ($data["\u0000*\u0000items"] as $d) {
-        //     $sting .= $d['rating'] . ',';
-        // }
         $textMessageBuilder = new TextMessageBuilder($text);
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
     }
@@ -253,18 +247,13 @@ class Webhook extends Controller
                                     [
                                         new BoxComponentBuilder(
                                             'baseline',
-                                            [
-                                                new TextComponentBuilder("Keterangan :", 5, null, "md", null, null, true, null, "bold", "#000000")
-
-                                            ],
+                                            [new TextComponentBuilder("Keterangan :", 5, null, "md", null, null, true, null, "bold", "#000000")],
                                             null,
                                             "sm"
                                         ),
                                         new BoxComponentBuilder(
                                             'baseline',
-                                            [
-                                                new TextComponentBuilder($value['keterangan'], 5, null, "xs", null, null, true, null, null, "#696d65")
-                                            ],
+                                            [new TextComponentBuilder($value['keterangan'], 5, null, "xs", null, null, true, null, null, "#696d65")],
                                             null,
                                             "sm"
                                         )
