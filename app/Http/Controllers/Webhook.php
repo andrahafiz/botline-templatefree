@@ -147,19 +147,31 @@ class Webhook extends Controller
 
             $stickerMessageBuilder = new StickerMessageBuilder(1, 2);
 
-            $message2 = "Kegunaan akun ini adalah menampilkan beberapa rekomendasi template website yang dapat anda download secara gratis";
+            $message2 = "Kegunaan akun ini adalah menampilkan beberapa rekomendasi template website yang dapat anda download secara gratis..semoga semakin semangat desiginnya";
             $textMessageBuilder2 = new TextMessageBuilder($message2);
 
-            $message3 = "Untuk memulainya silahkan tekan tombol yang tersedia dibawah ini";
+            $message3 = "Bagaimana cara menggunakan nya ? untuk mencobanya silahkan pilih pilihan yang telah kami sediakan";
             $textMessageBuilder3 = new TextMessageBuilder($message3);
 
-            $message3 =  new TemplateMessageBuilder("Pilihan", new ButtonTemplateBuilder(null, "Pilihan : ", null, [new MessageTemplateActionBuilder('Template Admin', 'Template Admin'), new MessageTemplateActionBuilder('Template Lainnya', 'Template Lainnya')]));
+            $textMessageBuilder4 =  new TemplateMessageBuilder(
+                "Pilihan",
+                new ButtonTemplateBuilder(
+                    null,
+                    "Pilihan : ",
+                    null,
+                    [
+                        new MessageTemplateActionBuilder('Template Admin', 'Template Admin'),
+                        new MessageTemplateActionBuilder('Template Lainnya', 'Template Lainnya')
+                    ]
+                )
+            );
 
             $multiMessageBuilder = new MultiMessageBuilder();
             $multiMessageBuilder->add($textMessageBuilder);
             $multiMessageBuilder->add($stickerMessageBuilder);
             $multiMessageBuilder->add($textMessageBuilder2);
-            $multiMessageBuilder->add($message3);
+            $multiMessageBuilder->add($textMessageBuilder3);
+            $multiMessageBuilder->add($textMessageBuilder4);
 
             $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
 
@@ -177,17 +189,27 @@ class Webhook extends Controller
         if (strtolower($userMessage) == 'template admin') {
             $this->sendQuestion($event['replyToken']);
         } else {
-            $message = 'Sepertinya kamu mengetikan perintah yang tidak ada.';
+            $message = 'Sepertinya kamu mengetikan perintah yang tidak tersedia.';
             $textMessageBuilder = new TextMessageBuilder($message);
 
-            $message2 = "Berikut beberapa pilihan perintah yang tersedia " . "!\n" . "1. Template Admin " . "!\n" . "2. Template Lainnya";
-            $textMessageBuilder2 = new TextMessageBuilder($message2);
+            // $message2 = "Berikut beberapa pilihan perintah yang tersedia " . "!\n" . "1. Template Admin " . "!\n" . "2. Template Lainnya";
+            // $textMessageBuilder2 = new TextMessageBuilder($message2);
+
+            $textMessageBuilder4 =  new TemplateMessageBuilder(
+                "Rekomendasi pilihan",
+                new ButtonTemplateBuilder(
+                    null,
+                    "Berikut beberapa pilihan perintah yang kami sediakan : ",
+                    null,
+                    [new MessageTemplateActionBuilder('Template Admin', 'Template Admin'), new MessageTemplateActionBuilder('Template Lainnya', 'Template Lainnya')]
+                )
+            );
 
             $stickerMessageBuilder = new StickerMessageBuilder(1, 10);
             $multiMessageBuilder = new MultiMessageBuilder();
             $multiMessageBuilder->add($textMessageBuilder);
             $multiMessageBuilder->add($stickerMessageBuilder);
-            $multiMessageBuilder->add($textMessageBuilder2);
+            $multiMessageBuilder->add($textMessageBuilder4);
 
             $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
         };
@@ -214,8 +236,8 @@ class Webhook extends Controller
         $data = $this->templateGateway->getData();
         $converttojson = json_encode($data);
         $converttoarray = json_decode($converttojson, true);
-        // $hero_image = "";
 
+        //Create List Template
         $columns = array();
         foreach ($converttoarray as $value) {
             # code...
@@ -279,10 +301,24 @@ class Webhook extends Controller
         }
         $builder = new CarouselContainerBuilder($columns);
 
-        // build message
+        //Show List Template
         $messageBuilder = new FlexMessageBuilder("Gunakan mobile app untuk melihat soal", $builder);
 
-        // send message
-        $response = $this->bot->replyMessage($replyToken, $messageBuilder);
+        //Pesan rekomendasi pilihan
+        $rekomendasiopsi =  new TemplateMessageBuilder(
+            "Rekomendasi pilihan",
+            new ButtonTemplateBuilder(
+                null,
+                "Berikut beberapa pilihan perintah yang kami sediakan : ",
+                null,
+                [new MessageTemplateActionBuilder('Template Admin', 'Template Admin'), new MessageTemplateActionBuilder('Template Lainnya', 'Template Lainnya')]
+            )
+        );
+
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($messageBuilder);
+        $multiMessageBuilder->add($rekomendasiopsi);
+
+        $response = $this->bot->replyMessage($replyToken, $multiMessageBuilder);
     }
 }
