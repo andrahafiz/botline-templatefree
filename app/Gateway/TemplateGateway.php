@@ -19,7 +19,7 @@ class TemplateGateway
     // Question
     public function getData(string $type)
     {
-        $keywoard = preg_replace("/Template/", "", $type);
+        $keywoard = trim(preg_replace("/Template/", "", $type));
         $data = $this->db->select("select * from template  where tipe='" . $keywoard . "' limit 5");
         // $data = $this->db->table('template')->get()->first();
         if ($data) {
