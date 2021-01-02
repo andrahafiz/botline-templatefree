@@ -156,7 +156,7 @@ class Webhook extends Controller
             $multiMessageBuilder->add($textMessageBuilder);
             $multiMessageBuilder->add($stickerMessageBuilder);
             $multiMessageBuilder->add($textMessageBuilder2);
-            // $multiMessageBuilder->add($message3);
+            $multiMessageBuilder->add($message3);
 
             $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
 
