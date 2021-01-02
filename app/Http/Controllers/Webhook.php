@@ -186,8 +186,8 @@ class Webhook extends Controller
     private function textMessage($event)
     {
         $userMessage = $event['message']['text'];
-        if (strtolower($userMessage) == 'template admin') {
-            $this->sendQuestion($event['replyToken']);
+        if (strtolower($userMessage) == 'template admin' or strtolower($userMessage) == 'template lainnya') {
+            $this->pushTemplate($event['replyToken'], $userMessage);
         } else {
             $message = 'Sepertinya kamu mengetikan perintah yang tidak tersedia.';
             $textMessageBuilder = new TextMessageBuilder($message);
@@ -231,9 +231,9 @@ class Webhook extends Controller
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
     }
 
-    private function sendQuestion($replyToken)
+    private function pushTemplate($replyToken, $tipe)
     {
-        $data = $this->templateGateway->getData();
+        $data = $this->templateGateway->getData($tipe);
         $converttojson = json_encode($data);
         $converttoarray = json_decode($converttojson, true);
 
@@ -299,6 +299,7 @@ class Webhook extends Controller
                         )
                 );
         }
+
         $builder = new CarouselContainerBuilder($columns);
 
         //Show List Template

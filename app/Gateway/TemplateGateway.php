@@ -17,9 +17,9 @@ class TemplateGateway
     }
 
     // Question
-    function getData()
+    public function getData(string $type)
     {
-        $data = $this->db->select("select * from template limit 5");
+        $data = $this->db->select("select * from template  where Type='" . $type . "' limit 5");
         // $data = $this->db->table('template')->get()->first();
         if ($data) {
             return (array) $data;
