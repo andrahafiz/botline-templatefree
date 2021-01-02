@@ -153,7 +153,7 @@ class Webhook extends Controller
             $message3 = "Untuk memulainya silahkan tekan tombol yang tersedia dibawah ini";
             $textMessageBuilder3 = new TextMessageBuilder($message3);
 
-            $message3 =  new TemplateMessageBuilder("ayam", new ButtonTemplateBuilder("title", "text", null, [new MessageTemplateActionBuilder('Template Admin', 'Template Admin'), new MessageTemplateActionBuilder('Template Lainnya', 'Template Lainnya')]));
+            $message3 =  new TemplateMessageBuilder("Pilihan", new ButtonTemplateBuilder(null, "Pilihan : ", null, [new MessageTemplateActionBuilder('Template Admin', 'Template Admin'), new MessageTemplateActionBuilder('Template Lainnya', 'Template Lainnya')]));
 
             $multiMessageBuilder = new MultiMessageBuilder();
             $multiMessageBuilder->add($textMessageBuilder);
