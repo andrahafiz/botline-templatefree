@@ -342,8 +342,6 @@ class Webhook extends Controller
             $multiMessageBuilder->add($textMessageBuilder2);
         }
 
-
-
         // send message
         $response = $this->bot->replyMessage($replyToken, $multiMessageBuilder);
     }
