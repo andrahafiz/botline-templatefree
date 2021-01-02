@@ -240,95 +240,111 @@ class Webhook extends Controller
 
         //Create List Template
         $columns = array();
-        $multiMessageBuilder = null;
+        $multiMessageBuilder = new MultiMessageBuilder();
         if (isset($converttoarray)) {
-            $multiMessageBuilder =  new TextMessageBuilder("Ada");
+            //jika  data ada
+            foreach ($converttoarray as $value) {
+                # code...
+                $icon = array();
+                for ($i = 1; $i <= 5; $i++) {
+                    if ($i <= $value['rating']) {
+                        $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
+                    } else {
+                        $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png', null, "xs");
+                    }
+                }
+                $icon[] = new TextComponentBuilder(floatval($value['rating']) . "", null, "md", "xs", null, null, null, null, null, "#8c8c8c");
+                $columns[] = BubbleContainerBuilder::builder()
+                    ->setDirection("ltr")
+                    ->setHero(
+                        new ImageComponentBuilder($value['image'], null, null, null, null, "full", "320:213", "cover")
+                    )->setBody(
+                        // new BoxComponentBuilder("vertical",)
+                        BoxComponentBuilder::builder()
+                            ->setLayout("vertical")
+                            ->setSpacing("sm")
+                            ->setPaddingAll("13px")
+                            ->setContents(
+                                [
+                                    new TextComponentBuilder($value['judul_template'], null, null, "lg", null, null, true, null, 'bold', "#000000"),
+                                    new BoxComponentBuilder(
+                                        'baseline',
+                                        $icon
+                                    ),
+                                    new BoxComponentBuilder(
+                                        'vertical',
+                                        [
+                                            new BoxComponentBuilder(
+                                                'baseline',
+                                                [new TextComponentBuilder("Keterangan :", 5, null, "md", null, null, true, null, "bold", "#000000")],
+                                                null,
+                                                "sm"
+                                            ),
+                                            new BoxComponentBuilder(
+                                                'baseline',
+                                                [new TextComponentBuilder($value['keterangan'], 5, null, "xs", null, null, true, null, null, "#696d65")],
+                                                null,
+                                                "sm"
+                                            )
+                                        ]
+                                    )
+                                ]
+                            )
+
+                    )->setFooter(
+                        BoxComponentBuilder::builder()
+                            ->setLayout("horizontal")
+                            ->setSpacing("sm")
+                            ->setContents(
+                                [
+                                    new ButtonComponentBuilder(new UriTemplateActionBuilder('Priview', $value['link_prev']), null, null, null, "secondary"),
+                                    new ButtonComponentBuilder(new UriTemplateActionBuilder('Download', $value['link_down']), null, null, null, "primary")
+                                ]
+                            )
+                    );
+            }
+
+            $builder = new CarouselContainerBuilder($columns);
+
+            //Show List Template
+            $messageBuilder = new FlexMessageBuilder("Gunakan mobile app untuk melihat soal", $builder);
+
+            //Pesan rekomendasi pilihan
+            $rekomendasiopsi =  new TemplateMessageBuilder(
+                "Rekomendasi pilihan",
+                new ButtonTemplateBuilder(
+                    null,
+                    "Berikut beberapa pilihan perintah yang kami sediakan : ",
+                    null,
+                    [new MessageTemplateActionBuilder('Template Admin', 'Template Admin'), new MessageTemplateActionBuilder('Template Lainnya', 'Template Lainnya')]
+                )
+            );
+            $multiMessageBuilder->add($messageBuilder);
+            $multiMessageBuilder->add($rekomendasiopsi);
         } else {
-            $multiMessageBuilder =  new TextMessageBuilder("Tidak Ada");
+            $message = 'Maaf, sepertinya data yang kamu inginkan tidak ada';
+            $textMessageBuilder = new TextMessageBuilder($message);
+
+            $textMessageBuilder2 =  new TemplateMessageBuilder(
+                "Rekomendasi pilihan",
+                new ButtonTemplateBuilder(
+                    null,
+                    "Mungkin coba lagi dengan opsi yang telah kami sediakan ",
+                    null,
+                    [new MessageTemplateActionBuilder('Template Admin', 'Template Admin'), new MessageTemplateActionBuilder('Template Lainnya', 'Template Lainnya')]
+                )
+            );
+
+            $stickerMessageBuilder = new StickerMessageBuilder(1, 111);
+            $multiMessageBuilder = new MultiMessageBuilder();
+            $multiMessageBuilder->add($textMessageBuilder);
+            $multiMessageBuilder->add($stickerMessageBuilder);
+            $multiMessageBuilder->add($textMessageBuilder2);
         }
 
-        // foreach ($converttoarray as $value) {
-        //     # code...
-        //     $icon = array();
-        //     for ($i = 1; $i <= 5; $i++) {
-        //         if ($i <= $value['rating']) {
-        //             $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png', null, "xs");
-        //         } else {
-        //             $icon[] =  new IconComponentBuilder('https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png', null, "xs");
-        //         }
-        //     }
-        //     $icon[] = new TextComponentBuilder(floatval($value['rating']) . "", null, "md", "xs", null, null, null, null, null, "#8c8c8c");
-        //     $columns[] = BubbleContainerBuilder::builder()
-        //         ->setDirection("ltr")
-        //         ->setHero(
-        //             new ImageComponentBuilder($value['image'], null, null, null, null, "full", "320:213", "cover")
-        //         )->setBody(
-        //             // new BoxComponentBuilder("vertical",)
-        //             BoxComponentBuilder::builder()
-        //                 ->setLayout("vertical")
-        //                 ->setSpacing("sm")
-        //                 ->setPaddingAll("13px")
-        //                 ->setContents(
-        //                     [
-        //                         new TextComponentBuilder($value['judul_template'], null, null, "lg", null, null, true, null, 'bold', "#000000"),
-        //                         new BoxComponentBuilder(
-        //                             'baseline',
-        //                             $icon
-        //                         ),
-        //                         new BoxComponentBuilder(
-        //                             'vertical',
-        //                             [
-        //                                 new BoxComponentBuilder(
-        //                                     'baseline',
-        //                                     [new TextComponentBuilder("Keterangan :", 5, null, "md", null, null, true, null, "bold", "#000000")],
-        //                                     null,
-        //                                     "sm"
-        //                                 ),
-        //                                 new BoxComponentBuilder(
-        //                                     'baseline',
-        //                                     [new TextComponentBuilder($value['keterangan'], 5, null, "xs", null, null, true, null, null, "#696d65")],
-        //                                     null,
-        //                                     "sm"
-        //                                 )
-        //                             ]
-        //                         )
-        //                     ]
-        //                 )
 
-        //         )->setFooter(
-        //             BoxComponentBuilder::builder()
-        //                 ->setLayout("horizontal")
-        //                 ->setSpacing("sm")
-        //                 ->setContents(
-        //                     [
-        //                         new ButtonComponentBuilder(new UriTemplateActionBuilder('Priview', $value['link_prev']), null, null, null, "secondary"),
-        //                         new ButtonComponentBuilder(new UriTemplateActionBuilder('Download', $value['link_down']), null, null, null, "primary")
-        //                     ]
-        //                 )
-        //         );
-        // }
-        // $builder = new CarouselContainerBuilder($columns);
 
-        // //Show List Template
-        // $messageBuilder = new FlexMessageBuilder("Gunakan mobile app untuk melihat soal", $builder);
-
-        // //Pesan rekomendasi pilihan
-        // $rekomendasiopsi =  new TemplateMessageBuilder(
-        //     "Rekomendasi pilihan",
-        //     new ButtonTemplateBuilder(
-        //         null,
-        //         "Berikut beberapa pilihan perintah yang kami sediakan : ",
-        //         null,
-        //         [new MessageTemplateActionBuilder('Template Admin', 'Template Admin'), new MessageTemplateActionBuilder('Template Lainnya', 'Template Lainnya')]
-        //     )
-        // );
-
-        // $multiMessageBuilder = new MultiMessageBuilder();
-        // $multiMessageBuilder->add($messageBuilder);
-        // $multiMessageBuilder->add($rekomendasiopsi);
-        // // $multiMessageBuilder->add($stickerMessageBuilder);
-        // // $multiMessageBuilder->add($textMessageBuilder4);
-        // // send message
+        // send message
         $response = $this->bot->replyMessage($replyToken, $multiMessageBuilder);
     }
 }
