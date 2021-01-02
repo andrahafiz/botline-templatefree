@@ -234,6 +234,7 @@ class Webhook extends Controller
     private function pushTemplate($replyToken, $tipe)
     {
         $data = $this->templateGateway->getData($tipe);
+        file_put_contents('php://stderr', 'Data: ' . json_encode($data));
         $converttojson = json_encode($data);
         $converttoarray = json_decode($converttojson, true);
 
