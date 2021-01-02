@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Gateway\EventLogGateway;
 use App\Gateway\TemplateGateway;
 use App\Gateway\UserGateway;
 use Illuminate\Http\Request;
@@ -13,18 +12,14 @@ use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\MessageBuilder\MultiMessageBuilder;
 use LINE\LINEBot\MessageBuilder\StickerMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
-use LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder;
-use LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
 use LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
-use LINE\LINEBot\MessageBuilder\Flex\ComponentBuilder;
 use LINE\LINEBot\MessageBuilder\Flex\ContainerBuilder\CarouselContainerBuilder;
 use LINE\LINEBot\MessageBuilder\Flex\ContainerBuilder\BubbleContainerBuilder;
 use LINE\LINEBot\MessageBuilder\Flex\ComponentBuilder\BoxComponentBuilder;
 use LINE\LINEBot\MessageBuilder\Flex\ComponentBuilder\ImageComponentBuilder;
-use LINE\LINEBot\Constant\Flex\ComponentLayout;
 use LINE\LINEBot\MessageBuilder\Flex\ComponentBuilder\ButtonComponentBuilder;
 use LINE\LINEBot\MessageBuilder\Flex\ComponentBuilder\IconComponentBuilder;
 use LINE\LINEBot\MessageBuilder\Flex\ComponentBuilder\TextComponentBuilder;
@@ -44,14 +39,6 @@ class Webhook extends Controller
      * @var Response
      */
     private $response;
-    /**
-     * @var Logger
-     */
-    private $logger;
-    /**
-     * @var EventLogGateway
-     */
-    private $logGateway;
     /**
      * @var UserGateway
      */
@@ -187,13 +174,10 @@ class Webhook extends Controller
     {
         $userMessage = $event['message']['text'];
         if (strtolower($userMessage) == 'template admin' or strtolower($userMessage) == 'template lainnya') {
-            $this->sendQuestion($event['replyToken'], $userMessage);
+            $this->sendTemplate($event['replyToken'], $userMessage);
         } else {
             $message = 'Sepertinya kamu mengetikan perintah yang tidak tersedia.';
             $textMessageBuilder = new TextMessageBuilder($message);
-
-            // $message2 = "Berikut beberapa pilihan perintah yang tersedia " . "!\n" . "1. Template Admin " . "!\n" . "2. Template Lainnya";
-            // $textMessageBuilder2 = new TextMessageBuilder($message2);
 
             $textMessageBuilder4 =  new TemplateMessageBuilder(
                 "Rekomendasi pilihan",
@@ -215,23 +199,7 @@ class Webhook extends Controller
         };
     }
 
-
-    private function test($replyToken)
-    {
-        $data = $this->templateGateway->getData();
-        // file_put_contents('php://stderr', 'Data: ' . json_encode($data));
-        $sting = json_encode($data);
-        $red = json_decode($sting, true);
-        $text = "";
-        foreach ($red as $value) {
-            $text .= $value['id'];
-        }
-
-        $textMessageBuilder = new TextMessageBuilder($text);
-        $this->bot->replyMessage($replyToken, $textMessageBuilder);
-    }
-
-    private function sendQuestion($replyToken, $keyword)
+    private function sendTemplate($replyToken, $keyword)
     {
         $data = $this->templateGateway->getData($keyword);
         $converttojson = json_encode($data);
