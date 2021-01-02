@@ -156,7 +156,7 @@ class Webhook extends Controller
             $textMessageBuilder4 =  new TemplateMessageBuilder(
                 "Pilihan",
                 new ButtonTemplateBuilder(
-                    "Pilihan",
+                    null,
                     "Pilihan : ",
                     null,
                     [
@@ -186,8 +186,8 @@ class Webhook extends Controller
     private function textMessage($event)
     {
         $userMessage = $event['message']['text'];
-        if (strtolower($userMessage) == 'template admin' or strtolower($userMessage) == 'template lainnya') {
-            $this->pushTemplate($event['replyToken'], $userMessage);
+        if (strtolower($userMessage) == 'template admin') {
+            $this->sendQuestion($event['replyToken'], $userMessage);
         } else {
             $message = 'Sepertinya kamu mengetikan perintah yang tidak tersedia.';
             $textMessageBuilder = new TextMessageBuilder($message);
@@ -231,12 +231,12 @@ class Webhook extends Controller
         $this->bot->replyMessage($replyToken, $textMessageBuilder);
     }
 
-    private function pushTemplate($replyToken, $tipe)
+    private function sendQuestion($replyToken, $keyword)
     {
-        $data = $this->templateGateway->getData($tipe);
-        file_put_contents('php://stderr', 'Data: ' . json_encode($data));
+        $data = $this->templateGateway->getData($keyword);
         $converttojson = json_encode($data);
         $converttoarray = json_decode($converttojson, true);
+        // $hero_image = "";
 
         //Create List Template
         $columns = array();
@@ -300,7 +300,6 @@ class Webhook extends Controller
                         )
                 );
         }
-
         $builder = new CarouselContainerBuilder($columns);
 
         //Show List Template
@@ -310,6 +309,7 @@ class Webhook extends Controller
         $rekomendasiopsi =  new TemplateMessageBuilder(
             "Rekomendasi pilihan",
             new ButtonTemplateBuilder(
+                null,
                 "Berikut beberapa pilihan perintah yang kami sediakan : ",
                 null,
                 [new MessageTemplateActionBuilder('Template Admin', 'Template Admin'), new MessageTemplateActionBuilder('Template Lainnya', 'Template Lainnya')]
@@ -319,7 +319,9 @@ class Webhook extends Controller
         $multiMessageBuilder = new MultiMessageBuilder();
         $multiMessageBuilder->add($messageBuilder);
         $multiMessageBuilder->add($rekomendasiopsi);
-
+        // $multiMessageBuilder->add($stickerMessageBuilder);
+        // $multiMessageBuilder->add($textMessageBuilder4);
+        // send message
         $response = $this->bot->replyMessage($replyToken, $multiMessageBuilder);
     }
 }
